@@ -7,6 +7,7 @@ from django.utils import timezone
 
 class Master(models.Model):
     name = models.CharField(max_length=20)
+    friends = models.IntegerField(default=0)
     choice1 = models.BooleanField(default=False)
     choice2 = models.BooleanField(default=False)
     choice3 = models.BooleanField(default=False)
