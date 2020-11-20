@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="choice4" value="1">
+        <input type="image" src="{% static 'green.png' %}" alt="빨강" name="choice4" value="1" href="{% url 'choice5' pk=player.pk %}"><br><br>
+    </form>
+    
+    
+
+    
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="choice4" value="2">
+        <input type="image" src="{% static 'yellow.jpg' %}" alt="파랑" name="choice4" value="2" href="{% url 'choice5' pk=player.pk %}"><br><br>
+    </form>
+    
+{% endblock %}

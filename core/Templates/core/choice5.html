@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+  
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="choice5" value="1">
+        <input type="image" src="{% static '갤럭시에어팟.jpg' %}" alt="갤럭시에어팟" name="choice5" value="1" href="{% url 'choice6' pk=player.pk %}"><br><br>
+    </form>
+    
+    
+
+    
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="choice5" value="2">
+        <input type="image" src="{% static '아이폰버즈.jpg' %}" alt="아이폰버즈"" name="choice5" value="2" href="{% url 'choice6' pk=player.pk %}"><br><br>
+    </form>
+    
+{% endblock %}

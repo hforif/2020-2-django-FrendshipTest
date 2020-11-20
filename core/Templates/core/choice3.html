@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="choice3" value="1">
+        <input type="image" src="{% static '전광렬.png' %}" alt="전학영" name="choice3" value="1" href="{% url 'choice4' pk=player.pk %}"><br><br>
+    </form>
+    
+
+    
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="choice3" value="2">
+        <input type="image" src="{% static '유병재.png' %}" alt="테경" name="choice3" value="2" href="{% url 'choice4' pk=player.pk %}"><br><br>
+    </form>
+    
+{% endblock %}
