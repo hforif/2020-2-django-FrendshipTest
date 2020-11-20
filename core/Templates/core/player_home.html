@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>우정테스트</h1>
+지금까지 {{ friends }}명이 {{ name }}님과 우정을 테스트했습니다.
+<br>
+이름을 입력하세요
+<div>
+    <form method="POST">{% csrf_token %}
+<input type="text" size=20 name=name>
+<button type="submit">시작하기</button>
+        </form>
+    </div>
+</body>
+</html>
