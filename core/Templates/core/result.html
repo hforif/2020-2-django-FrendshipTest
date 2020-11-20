@@ -5,12 +5,12 @@
     <title>Title</title>
 </head>
 <body>
- 맞춘갯수
-{{ player}}/10
+ 당신의 점수는
+{{ player_score }}/10
 
-<br>기록
-{% for name, count in count_list %}
-    <br>{{ name }}: {{ count }}
+<br><br>우정랭킹
+{% for player in players %}
+    <br>{{ player.name }} - 마음일치율 {{ player.score }}0%
 {% endfor %}
 </body>
 </html>

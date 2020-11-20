@@ -3,20 +3,24 @@
 
 {% block content %}
 
-    
+<div>  
     <form method="POST">
         {% csrf_token %}
         <input type="hidden" name="choice9" value="1">
         <input type="image" src="{% static '대학원가기.jpg' %}" alt="대학원가기" name="choice9" value="1" href="{% url 'choice10' pk=player.pk %}"><br><br>
     </form>
-    
+    <div><h1>대학원가기</h1></div>
+
+</div>    
     
 
-    
+<div>
     <form method="POST">
         {% csrf_token %}
         <input type="hidden" name="choice9" value="2">
         <input type="image" src="{% static '피자.jpg' %}" alt="피자" name="choice9" value="2" href="{% url 'choice10' pk=player.pk %}"><br><br>
     </form>
-    
+    <div><h1>피자?? 뭔가 이상한데?</h1></div>
+
+</div>    
 {% endblock %}

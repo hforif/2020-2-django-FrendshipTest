@@ -31,4 +31,5 @@ urlpatterns = [
     path('player_home/<int:pk>/', views.player_home, name='player_home'),
     path('result/<int:pk>/', views.result_, name='result_'),
     path('master_home', views.master_home, name="master_home"),
+    path('', views.start, name="start"),
 ]

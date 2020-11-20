@@ -2,20 +2,23 @@
 {% load static %}
 
 {% block content %}
-
+<div>
     <form method="POST">
         {% csrf_token %}
         <input type="hidden" name="choice2" value="1">
         <input type="image" src="{% static '민초.png' %}" alt="민초" name="choice2" value="1" href="{% url 'choice3' pk=player.pk %}"><br><br>
     </form>
-    
+    <div><h1>민트초코</h1></div>
+
+</div>
     
 
-    
+<div>
     <form method="POST">
         {% csrf_token %}
         <input type="hidden" name="choice2" value="2">
         <input type="image" src="{% static '파인애플피자.jpg' %}" alt="피자" name="choice2" value="2" href="{% url 'choice3' pk=player.pk %}"><br><br>
     </form>
-    
+    <div><h1>하와이안피자</h1></div>
+</div>
 {% endblock %}

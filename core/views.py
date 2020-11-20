@@ -5,7 +5,7 @@ from django.urls import reverse
 
 # Create your views here.
 
-def result(request,pk):
+def result(request,pk): #pk는 가장 최근 master pk
     ctx = {}
     player=get_object_or_404(Master, pk=pk)
     if request.method=="POST":
@@ -97,18 +97,16 @@ def result(request,pk):
                     player.save()
                 player.current+=1
                 player.save()
-                return redirect('complete')
+                return redirect('complete') #url name으로
     
     else:
-        a = Master.objects.order_by('-id')[0].id
-        player = get_object_or_404(Master, id=a)
         ctx['player'] = player
         return render(request, 'core/choice1.html', ctx)
 
-def result2(request,pk):
+def result2(request,pk): #pk는 가장 최근의 player의 pk
     ctx = {}
     player=get_object_or_404(Player,pk=pk)
-    master= Master.objects.order_by('-id')[0]
+    master= Master.objects.get(name=player.from_master) #가장최근의 플레이어의 from_master와 일치하는 Master 객체를 가져와야함
     if request.method=="POST":
         if player.current==1:
             if request.POST['choice1']=='1' or request.POST['choice1']=='2':
@@ -198,7 +196,7 @@ def result2(request,pk):
                     player.save()
                 player.current+=1
                 player.save()
-                pk = Player.objects.order_by('-id')[0].id
+                pk = master.id
                 return redirect(reverse('result_', kwargs={'pk':pk}))
     
     else:
@@ -214,7 +212,6 @@ def master_home(request):
         name = request.POST['name']
         Master.objects.create(name=name)
         pk = Master.objects.order_by('-id')[0].id
-        print(pk)
         return redirect(reverse('result', kwargs={'pk':pk}))
     else:
         return render(request, "core/master_home.html", )
@@ -223,24 +220,24 @@ def master_home(request):
 def player_home(request, pk):
     if request.method == "POST":
         name = request.POST['name']
-        Player.objects.create(name=name)
+        Player.objects.create(name=name, from_master=Master.objects.get(pk=pk).name)
         pk = Player.objects.order_by('-id')[0].id
         return redirect(reverse('result2', kwargs={'pk':pk}))
     else:
         friends = Master.objects.get(pk=pk).friends
         player_count = len(Player.objects.all())
-        name = Master.objects.order_by('-id')[0].name
+        name = Master.objects.get(pk=pk).name
         return render(request, "core/player_home.html", {"player_count": player_count, "friends": friends, "name":name})
 
 
 def complete(request):
-    pk = Master.objects.order_by('-id')
-    return render(request, "core/complete.html", {"pk": pk[0].id})
+    pk = Master.objects.order_by('-id')[0].id
+    return render(request, "core/complete.html", {"pk": pk})
 
 
-def result_(request, pk):
-    master = Master.objects.order_by('-id')[0]
-    players = Player.objects.all()
+def result_(request, pk): # 일치하는 master의 pk
+    master = Master.objects.get(pk=pk)
+    players = Player.objects.filter(from_master=Master.objects.get(pk=pk).name)
     count_list = []
     for i in range(len(players)):
         count = 0
@@ -265,11 +262,14 @@ def result_(request, pk):
         if master.choice10 == players[i].choice10:
             count += 1
         name = players[i].name
-        a = (name, count)
-        count_list.append(a)
-    b, player = count_list[-1]
-    ctx = {'count_list': count_list, 'players': players, 'player': player}
-    master = Master.objects.order_by('-id')[0]
+        players[i].score = count
+        players[i].save()
+    players = Player.objects.filter(from_master=Master.objects.get(pk=pk).name).order_by('-score') # score순서 > id순서로 정렬했습니다.
+    player_score = players.order_by('-id')[0].score
+    ctx = {'players': players, 'player_score': player_score}
     master.friends +=1
     master.save()
     return render(request, "core/result.html", ctx)
+
+def start(request):
+    return render(request, "core/start.html")

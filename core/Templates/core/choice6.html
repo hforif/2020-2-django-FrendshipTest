@@ -2,20 +2,24 @@
 {% load static %}
 
 {% block content %}
-
+<div>
     <form method="POST">
         {% csrf_token %}
         <input type="hidden" name="choice6" value="1">
         <input type="image" src="{% static '길가다똥맞기.jpg' %}" alt="길가다똥맞기" name="choice6" value="1" href="{% url 'choice7' pk=player.pk %}"><br><br>
     </form>
-    
+    <div><h1>길가다똥맞기</h1></div>
+
+</div>    
     
 
-    
+<div>
     <form method="POST">
         {% csrf_token %}
         <input type="hidden" name="choice6" value="2">
         <input type="image" src="{% static '길가다똥싸기.png' %}" alt="길가다똥싸기" name="choice6" value="2" href="{% url 'choice7' pk=player.pk %}"><br><br>
     </form>
+    <div><h1>길가다똥싸기</h1></div>
     
+</div>    
 {% endblock %}

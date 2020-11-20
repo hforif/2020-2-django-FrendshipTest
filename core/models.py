@@ -27,7 +27,8 @@ class Master(models.Model):
 
 
 class Player(models.Model):
-    score = models.IntegerField(default=0)
+    from_master = models.CharField(max_length=20, null=True)
+    score = models.IntegerField(null=True)
     name = models.CharField(max_length=20)
     current=models.IntegerField(default=1)
     choice1 = models.BooleanField(default=False)
