@@ -7,14 +7,7 @@
 
 </head>
 <body>
-    {% if not master %}
-    <h1>{{player.name}} 님이 선호하는 것은?</h1><br>
-    {% endif %}
-
-    {% if master %}
     <h1>{{master.name}} 님이 선호하는 것은?</h1><br>
-    {% endif %}
-
     
     {% block content %}
     {% endblock %}
